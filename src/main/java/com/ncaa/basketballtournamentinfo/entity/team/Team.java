@@ -1,9 +1,10 @@
-package com.ncaa.basketballtournamentinfo.team;
+package com.ncaa.basketballtournamentinfo.entity.team;
 
+import com.ncaa.basketballtournamentinfo.entity.player.Player;
 import jakarta.persistence.*;
-import org.antlr.v4.runtime.misc.NotNull;
 
 import java.util.Objects;
+import java.util.List;
 
 
 @Entity
@@ -24,6 +25,9 @@ public class Team {
     private String conference;
     private String location;
     private String nickname;
+
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL,  orphanRemoval = true)
+private List<Player> players;
 
     public Team(String name, String record, Integer wins, Integer losses, Integer conferenceWins,
                 Integer conferenceLosses, String university, String coach, String conference,

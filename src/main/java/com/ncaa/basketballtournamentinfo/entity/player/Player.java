@@ -1,5 +1,6 @@
-package com.ncaa.basketballtournamentinfo.player;
+package com.ncaa.basketballtournamentinfo.entity.player;
 
+import com.ncaa.basketballtournamentinfo.entity.team.Team;
 import jakarta.persistence.*;
 
 import java.util.Objects;
@@ -10,7 +11,7 @@ public class Player {
     // TODO: Implement Foreign Key (Relational Mapping)
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long playerId;
+    private Long id;
     private String name;
     private Integer jerseyNumber;
     @Column(name="class")
@@ -20,6 +21,10 @@ public class Player {
     private Double weight;
     private String hometown;
     private String highSchool;
+
+    @ManyToOne
+    @JoinColumn(name = "team_id", nullable = false)
+    private Team team;
 
     public Player() {}
 
@@ -36,8 +41,8 @@ public class Player {
         this.highSchool = highSchool;
     }
 
-    public Long getPlayerId() {
-        return playerId;
+    public Long getId() {
+        return id;
     }
 
     public String getName() {
@@ -108,18 +113,18 @@ public class Player {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Player player = (Player) o;
-        return Objects.equals(getPlayerId(), player.getPlayerId());
+        return Objects.equals(getId(), player.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getPlayerId());
+        return Objects.hashCode(getId());
     }
 
     @Override
     public String toString() {
         return "Player{" +
-                "playerId=" + playerId +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", jerseyNumber=" + jerseyNumber +
                 ", year='" + year + '\'' +

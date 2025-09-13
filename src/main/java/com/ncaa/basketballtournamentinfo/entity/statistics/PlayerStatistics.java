@@ -1,18 +1,16 @@
-package com.ncaa.basketballtournamentinfo.stats;
+package com.ncaa.basketballtournamentinfo.entity.statistics;
 
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.function.DoubleToIntFunction;
-
 @Data
 @Entity
 @Table(name="player_stats")
-public class Stats {
+public class PlayerStatistics {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long statsId;
+    private Long id;
     // TODO: Implement Foreign Key (Relational Mapping)
     private Integer gamesPlayed;
     private Integer gamesStarted;
@@ -40,11 +38,11 @@ public class Stats {
     private Double personalFouls;
     private Double pointsPerGame;
 
-    public Stats() {
+    public PlayerStatistics() {
 
     }
 
-    public Stats(Integer gamesPlayed, Integer gamesStarted, Double minutesPlayed, Double fieldGoals,
+    public PlayerStatistics(Integer gamesPlayed, Integer gamesStarted, Double minutesPlayed, Double fieldGoals,
                  Double fieldGoalsAttempted, Double fieldGoalPercentage, Double threePoints,
                  Double threePointsAttempted, Double threePointPercentage, Double twoPoints,
                  Double twoPointsAttempted, Double twoPointPercentage, Double effectiveFieldGoalPercentage,
