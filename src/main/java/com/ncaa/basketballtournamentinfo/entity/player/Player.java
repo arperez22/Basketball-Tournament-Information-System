@@ -1,5 +1,6 @@
 package com.ncaa.basketballtournamentinfo.entity.player;
 
+import com.ncaa.basketballtournamentinfo.entity.statistics.PlayerStatistics;
 import com.ncaa.basketballtournamentinfo.entity.team.Team;
 import jakarta.persistence.*;
 
@@ -8,7 +9,6 @@ import java.util.Objects;
 @Entity
 @Table(name="players")
 public class Player {
-    // TODO: Implement Foreign Key (Relational Mapping)
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
@@ -25,6 +25,9 @@ public class Player {
     @ManyToOne
     @JoinColumn(name = "team_id", nullable = false)
     private Team team;
+
+    @OneToOne(mappedBy = "player")
+    private PlayerStatistics playerStatistics;
 
     public Player() {}
 
@@ -77,6 +80,15 @@ public class Player {
         return highSchool;
     }
 
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public PlayerStatistics getPlayerStatistics() {
+        return playerStatistics;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -107,6 +119,18 @@ public class Player {
 
     public void setHighSchool(String highSchool) {
         this.highSchool = highSchool;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+    public void setPlayerStatistics(PlayerStatistics playerStatistics) {
+        this.playerStatistics = playerStatistics;
+
+        if (playerStatistics != null && playerStatistics.getPlayer() != this) {
+            playerStatistics.setPlayer(this);
+        }
     }
 
     @Override

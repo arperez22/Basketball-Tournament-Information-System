@@ -1,5 +1,6 @@
 package com.ncaa.basketballtournamentinfo.entity.statistics;
 
+import com.ncaa.basketballtournamentinfo.entity.player.Player;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -11,7 +12,6 @@ public class PlayerStatistics {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
-    // TODO: Implement Foreign Key (Relational Mapping)
     private Integer gamesPlayed;
     private Integer gamesStarted;
     private Double minutesPlayed;
@@ -37,6 +37,10 @@ public class PlayerStatistics {
     private Double turnovers;
     private Double personalFouls;
     private Double pointsPerGame;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "player_id", referencedColumnName = "id", nullable = false)
+    private Player player;
 
     public PlayerStatistics() {
 
@@ -74,5 +78,13 @@ public class PlayerStatistics {
         this.blocks = blocks;
         this.personalFouls = personalFouls;
         this.pointsPerGame = pointsPerGame;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+
+        if(player != null && player.getPlayerStatistics() != this) {
+            player.setPlayerStatistics(this);
+        }
     }
 }

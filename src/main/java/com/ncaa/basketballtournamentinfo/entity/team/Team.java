@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 
 import java.util.Objects;
 import java.util.List;
+import java.util.ArrayList;
 
 
 @Entity
@@ -27,7 +28,7 @@ public class Team {
     private String nickname;
 
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL,  orphanRemoval = true)
-private List<Player> players;
+    private List<Player> players = new ArrayList<>();
 
     public Team(String name, String record, Integer wins, Integer losses, Integer conferenceWins,
                 Integer conferenceLosses, String university, String coach, String conference,
@@ -94,6 +95,20 @@ private List<Player> players;
 
     public String getNickname() {
         return nickname;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public void addPlayer(Player player) {
+        players.add(player);
+        player.setTeam(this);
+    }
+
+    public void removePlayer(Player player) {
+        players.remove(player);
+        player.setTeam(null);
     }
 
     public void setName(String name) {
