@@ -1,5 +1,6 @@
 package com.ncaa.basketballtournamentinfo.entity.team;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ncaa.basketballtournamentinfo.entity.player.Player;
 import jakarta.persistence.*;
 
@@ -28,6 +29,7 @@ public class Team {
     private String nickname;
 
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL,  orphanRemoval = true)
+    @JsonManagedReference
     private List<Player> players = new ArrayList<>();
 
     public Team(String name, String record, Integer wins, Integer losses, Integer conferenceWins,

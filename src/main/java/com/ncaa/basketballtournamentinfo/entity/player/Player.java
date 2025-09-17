@@ -1,5 +1,7 @@
 package com.ncaa.basketballtournamentinfo.entity.player;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ncaa.basketballtournamentinfo.entity.statistics.PlayerStatistics;
 import com.ncaa.basketballtournamentinfo.entity.team.Team;
 import jakarta.persistence.*;
@@ -10,7 +12,7 @@ import java.util.Objects;
 @Table(name="players")
 public class Player {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     private String name;
     private Integer jerseyNumber;
@@ -24,9 +26,11 @@ public class Player {
 
     @ManyToOne
     @JoinColumn(name = "team_id", nullable = false)
+    @JsonBackReference
     private Team team;
 
     @OneToOne(mappedBy = "player")
+    @JsonIgnore
     private PlayerStatistics playerStatistics;
 
     public Player() {}
