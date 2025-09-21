@@ -2,6 +2,7 @@ package com.ncaa.basketballtournamentinfo.entity.statistics;
 
 import com.ncaa.basketballtournamentinfo.entity.player.Player;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Getter
@@ -13,57 +14,77 @@ import lombok.*;
 public class PlayerStatistics {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     private Integer gamesPlayed;
 
+    @NotNull
     private Integer gamesStarted;
 
+    @NotNull
     private Double minutesPlayed;
 
+    @NotNull
     private Double fieldGoals;
 
+    @NotNull
     private Double fieldGoalsAttempted;
 
     private Double fieldGoalPercentage;
 
+    @NotNull
     private Double threePoints;
 
+    @NotNull
     private Double threePointsAttempted;
 
     private Double threePointPercentage;
 
+    @NotNull
     private Double twoPoints;
 
+    @NotNull
     private Double twoPointsAttempted;
 
     private Double twoPointPercentage;
 
     private Double effectiveFieldGoalPercentage;
 
+    @NotNull
     private Double freeThrows;
 
+    @NotNull
     private Double freeThrowsAttempted;
 
     private Double freeThrowsPercentage;
 
+    @NotNull
     private Double offensiveRebounds;
 
+    @NotNull
     private Double defensiveRebounds;
 
+    @NotNull
     private Double totalRebounds;
 
+    @NotNull
     private Double assists;
 
+    @NotNull
     private Double steals;
 
+    @NotNull
     private Double blocks;
 
+    @NotNull
     private Double turnovers;
 
+    @NotNull
     private Double personalFouls;
 
+    @NotNull
     private Double pointsPerGame;
 
     @OneToOne(cascade = CascadeType.ALL)

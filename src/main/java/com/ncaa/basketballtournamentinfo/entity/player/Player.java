@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ncaa.basketballtournamentinfo.entity.statistics.PlayerStatistics;
 import com.ncaa.basketballtournamentinfo.entity.team.Team;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
-import java.util.Objects;
 
 @Getter
 @Setter
@@ -20,15 +20,20 @@ public class Player {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     private String name;
 
+    @NotNull
     private Integer jerseyNumber;
 
+    @NotNull
     @Column(name="class")
     private String year;
 
+    @NotNull
     private String position;
 
+    @NotNull
     private String height;
 
     private Double weight;
