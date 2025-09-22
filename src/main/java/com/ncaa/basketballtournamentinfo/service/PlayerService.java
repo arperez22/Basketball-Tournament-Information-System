@@ -6,6 +6,7 @@ import com.ncaa.basketballtournamentinfo.repository.TeamRepository;
 import com.ncaa.basketballtournamentinfo.entity.player.Player;
 import com.ncaa.basketballtournamentinfo.entity.team.Team;
 import com.ncaa.basketballtournamentinfo.dto.PlayerDTO;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -82,7 +83,7 @@ public class PlayerService {
     }
 
     public List<PlayerDTO> getAllPlayersDTO() {
-        return playerRepository.findAll()
+        return playerRepository.findAllPlayers()
                 .stream()
                 .map(this::mapToDTO)
                 .toList();
